@@ -8,17 +8,32 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
 
     const hashedToken = await bycryptjs.genSalt(10);
 
+    console.log("MAIL",userId);
+    console.log("EMAIL TYPE",emailType);
+    console.log(typeof emailType);
+    
+
     if (emailType === "VERIFY") {
-      await User.findByIdAndUpdate(userId, {
+      
+      const updateUser = await User.findByIdAndUpdate(userId, {
+        $set:{
         verifyverifyToken: hashedToken,
-        verifyTokenExpire: Date.now() + 360000,
+        verifyTokenExpire: Date.now() + 3600000, //expire in 1 hour from now
+      }
       });
+      console.log("updated user for VERIFY", updateUser);
+      
     } else if (emailType === "RESET") {
       await User.findByIdAndUpdate(userId, {
+        $set:{
         forgotPasswordToken: hashedToken,
-        forgotPasswordExpire: Date.now() + 360000,
+        forgotPasswordExpire: Date.now() + 3600000,
+      }
       });
     }
+
+    console.log("out side if else");
+    
 
     // Looking to send emails in production? Check out our Email API/SMTP product!
     var transport = nodemailer.createTransport({
