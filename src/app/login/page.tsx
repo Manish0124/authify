@@ -47,7 +47,7 @@ export default function LoginPage() {
 
   return (
 
-    <div className='flex flex-col items-center justify-center min-h-screen bg-red-300 py-3'  >
+    <div className='flex flex-col items-center justify-center min-h-screen bg-gray-500 py-3'  >
            <h1>{loading? "proccessing" : "Signup"}</h1>
            <hr />
            <label htmlFor="email">email</label>

@@ -13,7 +13,6 @@ export default function ProfilePage() {
       const res = await axios.post('/api/users/me')
       console.log(res.data.data._id);
       setData(res.data.data._id)
-      
     }
 
     const logOut = async ()=>{
